@@ -4,8 +4,7 @@ This project demonstrates a behavior change with the spark `grouping_id()` funct
 
 The grouping_id bitmaps between the two queries are the same.
 
-```
-----------------------
+```----------------------
 Start test: Grouping sets in same order as group by
 
 SELECT 'col1' as col1,
@@ -13,7 +12,7 @@ SELECT 'col1' as col1,
        'col3' as col3,
        grouping_id()            as grouping_id,
        count(1)                 as rowCount
-from __THIS__
+from values(1)
 GROUP BY col1, col2, col3
 
 GROUPING SETS (
@@ -25,7 +24,7 @@ GROUPING SETS (
 |col1|col2|col3|grouping_id|rowCount|
 +----+----+----+-----------+--------+
 |col1|null|null|          3|       1|
-|null|col2|col3|          4|       1|
+|col1|col2|col3|          4|       1|
 +----+----+----+-----------+--------+
 
 Grouping bitmap and associated dimensions: 3 col1
@@ -39,7 +38,7 @@ SELECT 'col1' as col1,
        'col3' as col3,
        grouping_id()            as grouping_id,
        count(1)                 as rowCount
-from __THIS__
+from values(1)
 GROUP BY col1, col2, col3
 
 GROUPING SETS (
@@ -51,7 +50,7 @@ GROUPING SETS (
 |col1|col2|col3|grouping_id|rowCount|
 +----+----+----+-----------+--------+
 |col1|null|null|          3|       1|
-|null|col2|col3|          4|       1|
+|col1|col2|col3|          4|       1|
 +----+----+----+-----------+--------+
 
 Grouping bitmap and associated dimensions: 3 col1
@@ -63,7 +62,7 @@ End test: Grouping sets in different order as group by
 
 The grouping_id bitmap changes between the two queries based on the order columns appear in the grouping sets clause.
 
-```
+```----------------------
 Start test: Grouping sets in same order as group by
 
 SELECT 'col1' as col1,
@@ -71,7 +70,7 @@ SELECT 'col1' as col1,
        'col3' as col3,
        grouping_id()            as grouping_id,
        count(1)                 as rowCount
-from __THIS__
+from values(1)
 GROUP BY col1, col2, col3
 
 GROUPING SETS (
@@ -83,7 +82,7 @@ GROUPING SETS (
 |col1|col2|col3|grouping_id|rowCount|
 +----+----+----+-----------+--------+
 |col1|null|null|          3|       1|
-|null|col2|col3|          4|       1|
+|col1|col2|col3|          4|       1|
 +----+----+----+-----------+--------+
 
 Grouping bitmap and associated dimensions: 3 col1
@@ -97,7 +96,7 @@ SELECT 'col1' as col1,
        'col3' as col3,
        grouping_id()            as grouping_id,
        count(1)                 as rowCount
-from __THIS__
+from values(1)
 GROUP BY col1, col2, col3
 
 GROUPING SETS (
@@ -108,7 +107,7 @@ GROUPING SETS (
 +----+----+----+-----------+--------+
 |col1|col2|col3|grouping_id|rowCount|
 +----+----+----+-----------+--------+
-|null|col2|col3|          1|       1|
+|col1|col2|col3|          1|       1|
 |col1|null|null|          6|       1|
 +----+----+----+-----------+--------+
 

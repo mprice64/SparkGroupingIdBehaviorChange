@@ -36,7 +36,7 @@ SELECT 'col1' as col1,
        'col3' as col3,
        grouping_id()            as grouping_id,
        count(1)                 as rowCount
-from __THIS__
+from values(1)
 GROUP BY col1, col2, col3
 """
 
@@ -47,9 +47,6 @@ GROUP BY col1, col2, col3
   def testSQL(testName: String, sql: String): Unit = {
     println("----------------------")
     println(s"Start test: $testName")
-
-    val df = spark.range(1)
-    df.createOrReplaceTempView("__THIS__")
 
     println(sql)
 
