@@ -7,12 +7,12 @@ object SparkGroupingIdBehaviorChange {
   def main(args: Array[String]): Unit = {
     implicit val spark = org.apache.spark.sql.SparkSession.builder().master("local[2]").getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
-    new GroupingSetBugTest().runTest()
+    new GroupingIdBehaviorChangeTest().runTest()
   }
 
 }
 
-class GroupingSetBugTest(implicit spark: SparkSession) {
+class GroupingIdBehaviorChangeTest(implicit spark: SparkSession) {
 
   def runTest() = {
 
